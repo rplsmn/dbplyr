@@ -126,7 +126,7 @@ test_that("if and ifelse use correctly named arguments",{
 
   expect_equal(
     test_translate_sql(if_else(condition = x, true = 1, false = 2, missing = 3)),
-    sql("CASE WHEN `x` THEN 1.0 WHEN NOT `x` THEN 2.0 WHEN (`x` IS NULL) THEN 3.0 END")
+    sql("CASE WHEN `x` THEN 1.0 WHEN NOT `x` THEN 2.0 ELSE 3.0 END")
   )
 })
 
