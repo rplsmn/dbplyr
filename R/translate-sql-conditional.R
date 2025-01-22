@@ -95,7 +95,7 @@ sql_if <- function(cond, if_true, if_false = quo(NULL), missing = quo(NULL)) {
   # CASE
   #   WHEN <cond> THEN `if_true`
   #   WHEN NOT <cond> THEN `if_false`
-  #   WHEN <cond> IS NULL THEN `missing`
+  #   ELSE `missing`
   # END
   #
   # Together these cases cover every possible case. So, if `if_false` and
@@ -112,7 +112,7 @@ sql_if <- function(cond, if_true, if_false = quo(NULL), missing = quo(NULL)) {
 
   if (!quo_is_null(missing)) {
     missing_cond <- translate_sql(is.na(!!cond), con = con)
-    missing_sql <- " WHEN {.val missing_cond} THEN {.val enpared_missing}"
+    missing_sql <- " ELSE {.val enpared_missing}"
     out <- paste0(out, missing_sql)
   }
 
